@@ -1,0 +1,102 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Person {
+protected:
+    string name;
+    int age;
+    char gender;
+
+public:
+    Person(string name, int age, char gender) {
+        this->name = name;
+        this->age = age;
+        this->gender = gender;
+    }
+
+    virtual void display_profile() {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Gender: " << gender << endl;
+    }
+};
+
+class Student : public Person {
+private:
+    string dept;
+    int year;
+
+public:
+    Student(string name, int age, char gender, string dept, int year)
+        : Person(name, age, gender) {
+        this->dept = dept;
+        this->year = year;
+    }
+
+    void display_profile() override {
+        Person::display_profile();
+        cout << "Department: " << dept << endl;
+        cout << "Year: " << year << endl;
+    }
+};
+
+class Clerk : public Person {
+private:
+    int work_load;
+    double salary;
+
+public:
+    Clerk(string name, int age, char gender, int work_load, double salary)
+        : Person(name, age, gender) {
+        this->work_load = work_load;
+        this->salary = salary;
+    }
+
+    void display_profile() override {
+        Person::display_profile();
+        cout << "Workload: " << work_load << endl;
+        cout << "Salary: " << salary << endl;
+    }
+};
+
+class Professor : public Person {
+private:
+    string dept;
+    int course_load;
+    double salary;
+
+public:
+    Professor(string name, int age, char gender, string dept, int course_load, double salary)
+        : Person(name, age, gender) {
+        this->dept = dept;
+        this->course_load = course_load;
+        this->salary = salary;
+    }
+
+    void display_profile() override {
+        Person::display_profile();
+        cout << "Department: " << dept << endl;
+        cout << "Course Load: " << course_load << endl;
+        cout << "Salary: " << salary << endl;
+    }
+};
+
+int main() {
+    Person* person;
+    Student student("Dayna Mukherjee", 21, 'F', "Physics", 3);
+    Clerk clerk("Olivia", 55, 'M', 40, 50000);
+    Professor professor("Ramu", 45, 'F', "Geology", 4, 80000);
+
+    person = &student;
+    person->display_profile();
+
+    person = &clerk;
+    person->display_profile();
+
+    person = &professor;
+    person->display_profile();
+
+    return 0;
+}

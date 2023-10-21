@@ -1,0 +1,82 @@
+import java.util.Scanner;
+import java.lang.Math;
+
+class Plot{
+    private static double area;
+    public void update(double a){
+        area += a;
+    }
+    public void Display(){
+        System.out.println("Total area : " + area);
+    }
+}
+
+class Circle extends Plot{
+    private double radius;
+    private double area;
+    public Circle(double rad){
+        radius = rad;
+        area = 3.14*rad*rad;
+        super.update(area);
+    }
+    public void Display(){
+        System.out.println("Circle radius : " + radius);
+        System.out.println("Area : " + area);
+    }
+    public  void tot_ar(){
+        super.Display();
+    }
+}
+
+class Triangle extends Plot{
+    private double x,y,z;
+    private double area;
+    public Triangle(double a,double b,double c){
+        x = a; y = b; z = c;
+        double s = (x+y+z)/2;
+        area = Math.sqrt(s*(s-x)*(s-y)*(s-z));
+        super.update(area);
+    }
+    public void Display(){
+        System.out.println("Triangle sides : " + x + ", " + y + ", " + z );
+        System.out.println("Area : " + area);
+    }
+    public  void tot_ar(){
+        super.Display();
+    }
+}
+
+class Rectangle extends Plot{
+    private double l,b;
+    private double area;
+    public Rectangle(double x,double y){
+        l = x;b = y;
+        area = l*b;
+        super.update(area);
+    }
+    public void Display(){
+        System.out.println("Rectangle sides : " + l + ", " + b);
+        System.out.println("Area : " + area);
+    }
+    public  void tot_ar(){
+        super.Display();
+    }
+}
+
+public class Java {
+    public static void main(String[] args) {
+        double a,b,c;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter radius of circle : ");
+        a = sc.nextDouble();
+        Circle cl = new Circle(a);
+        System.out.println("Enter sides of triangle : ");
+        a = sc.nextDouble(); b = sc.nextDouble(); c = sc.nextDouble();
+        Triangle tr = new Triangle(a,b,c);
+        System.out.println("Enter sides of rectangle : ");
+        a = sc.nextDouble(); b = sc.nextDouble();
+        Rectangle rt = new Rectangle(a,b);
+        cl.Display(); tr.Display(); rt.Display();
+        cl.tot_ar();
+    }
+}

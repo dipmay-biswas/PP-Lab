@@ -1,0 +1,75 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+class Shape {
+public:
+    virtual double area() = 0;
+};
+
+class Rectangle : public Shape {
+private:
+    double width, height;
+public:
+    Rectangle(double w, double h) {
+        width = w;
+        height = h;
+    }
+    double area() {
+        return width * height;
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) {
+        radius = r;
+    }
+    double area() {
+        return M_PI * pow(radius, 2);
+    }
+};
+
+class Triangle : public Shape {
+private:
+    double base, height;
+public:
+    Triangle(double b, double h) {
+        base = b;
+        height = h;
+    }
+    double area() {
+        return 0.5 * base * height;
+    }
+};
+
+int main() {
+
+    int W, H, R, B, Ht;	
+
+    Shape *shapes[3];
+	cout<<"Enter the width and height of the rectangle respectively"<<endl;
+		cin>>W>>H;
+	cout<<"Enter the radius of the circle"<<endl;
+		cin>>R;
+	cout<<"Enter the base and height of the triangle respectively"<<endl;
+		cin>>B>>Ht;
+    shapes[0] = new Rectangle(W, H);
+    shapes[1] = new Circle(R);
+    shapes[2] = new Triangle(B, Ht);
+
+    double totalArea = 0;
+    for (int i = 0; i < 3; i++) {
+        totalArea += shapes[i]->area();
+    }
+    cout << "The total area covered by the shapes is: " << totalArea << endl;
+
+    for (int i = 0; i < 3; i++) {
+        delete shapes[i];
+    }
+
+    return 0;
+}
